@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,5 +30,7 @@ Route::delete('/books/{id}', [BookController::class, 'destroy']);
 */
 
 Route::resource('books', BookController::class)->except('create', 'edit');
-
+Route::post('/register', [AuthController::class, 'register']);
 Route::resource('authors', AuthorController::class)->except('create', 'edit');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
